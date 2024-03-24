@@ -1,1 +1,21 @@
 https://imgur.com/cnkAVRn
+
+To design a three-server web infrastructure for hosting www.foobar.com, we can expand on the previous one-server setup to improve reliability and scalability. Here's how the infrastructure would look and the role of each component:
+
+1. Load Balancer (HAProxy): The addition of a load balancer is to distribute incoming web traffic evenly across multiple servers, ensuring no single server becomes overloaded. HAProxy is a popular open-source load balancer that can handle this task. It can be configured with various distribution algorithms, such as round-robin (where each server is used in turn), least connections (where the server with the fewest active connections is chosen), or source IP hash (where requests from the same IP address are sent to the same server). The choice of algorithm depends on the specific needs of the website and its traffic patterns.
+
+2. Two Additional Servers: Each of these servers will have a similar setup to the original one-server infrastructure, with Nginx as the web server, an application server, and a set of application files. The addition of these servers is to handle increased traffic and provide redundancy in case one server fails.
+
+3. Database Primary-Replica Cluster: Instead of having a single MySQL database, we now have a primary-replica (also known as master-slave) setup. The primary node is the main database that handles all write operations (INSERT, UPDATE, DELETE) and can also handle read operations (SELECT). The replica nodes are copies of the primary database and handle read operations. This setup improves the database's read capacity and provides a backup in case the primary database fails. If the primary database goes down, one of the replicas can be promoted to be the new primary.
+
+4. Active-Active vs. Active-Passive Load Balancer Setup: In an active-active setup, all load balancers are actively distributing traffic, which maximizes resource utilization and provides redundancy. In an active-passive setup, one load balancer is active, and the others are on standby, ready to take over if the active one fails. For this infrastructure, an active-active setup would be more efficient as it would ensure that both load balancers are utilized.
+
+ Issues with This Infrastructure:
+
+1. Single Points of Failure (SPOF): While the addition of multiple servers and a load balancer reduces the risk of downtime, there are still potential SPOFs. For example, if the load balancer fails in an active-passive setup, or if the primary database goes down and there's a delay in promoting a replica.
+
+2. Security Issues: Without a firewall, the servers are exposed to potential security threats from the internet. Additionally, not using HTTPS means that data transmitted between the user's browser and the web server is not encrypted, which could lead to sensitive information being intercepted.
+
+3. No Monitoring: Without a monitoring system in place, it's difficult to detect and respond to issues such as server failures, high traffic loads, or security breaches in real-time.
+
+To address these issues, you could implement redundant load balancers in an active-active setup, use firewalls to protect the servers, enable HTTPS for secure communication, and set up a monitoring system to keep track of the health and performance of the infrastructure.

@@ -1,1 +1,29 @@
 https://imgur.com/aHwqNfl
+
+To design a one-server web infrastructure for hosting a website accessible via www.foobar.com, we can start by visualizing the flow from a user's request to the delivery of the website content. Here's a step-by-step explanation:
+
+1. User Request: A user wants to access the website by typing www.foobar.com into their web browser.
+
+2. Domain Name System (DNS): The browser sends a query to a DNS server to resolve the domain name www.foobar.com to an IP address. The DNS server looks up the "A" record for www.foobar.com and finds that it points to the IP address 8.8.8.8.
+
+3. Server: The request is then sent to the server located at the IP address 8.8.8.8. A server is a computer system that provides services or resources to other computers over a network. In this case, it hosts the website and handles incoming web requests.
+
+4. Web Server (Nginx): Nginx is the web server software running on the server. Its role is to accept incoming HTTP requests from clients (like web browsers) and serve them the requested web pages or files. Nginx listens on port 80 (for HTTP) or port 443 (for HTTPS) and processes the request for www.foobar.com.
+
+5. Application Server: The application server is a software framework that provides an environment for the execution of the website's application code. It handles the business logic of the application and communicates with the web server and the database. In this setup, the application server could be a software like Gunicorn, uWSGI, or Passenger, depending on the programming language used.
+
+6. Application Files (Code Base): These are the actual files containing the source code of the website. They define the content, structure, and functionality of the website. The application server executes this code to generate dynamic content based on user requests.
+
+7. Database (MySQL): MySQL is the database management system used to store and manage the website's data. The application server interacts with the database to retrieve or update data as needed to fulfill user requests.
+
+8. Communication: The server uses the HTTP or HTTPS protocol to communicate with the user's computer. The web server sends the requested web pages or files back to the user's browser, which then renders the website for the user to view.
+
+ Issues with This Infrastructure:
+
+1. Single Point of Failure (SPOF): Since there is only one server, if it fails or goes offline, the entire website becomes inaccessible.
+
+2. Downtime During Maintenance: When updates or maintenance are required, such as deploying new code or restarting the web server, the website may experience downtime.
+
+3. Scalability: If the website experiences a significant increase in traffic, this single-server setup may not be able to handle the load, leading to slow response times or even crashes.
+
+To address these issues, you would typically look into more advanced infrastructure setups, such as using multiple servers, load balancers, and cloud services to improve reliability, uptime, and scalability.
