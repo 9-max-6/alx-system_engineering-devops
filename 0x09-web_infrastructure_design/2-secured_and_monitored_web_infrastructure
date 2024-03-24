@@ -1,0 +1,21 @@
+https://imgur.com/y6ltKUL
+
+To design a secure and monitored three-server web infrastructure for hosting www.foobar.com, we'll add security, encryption, and monitoring features to the previous setup. Here's the updated design and the role of each component:
+
+1. Firewalls: We add a firewall for each server and one for the load balancer. Firewalls are security devices that control incoming and outgoing network traffic based on predetermined security rules. They are used to protect the servers from unauthorized access, attacks, and other security threats.
+
+2. SSL Certificate: An SSL (Secure Sockets Layer) certificate is used to enable HTTPS for the website. HTTPS is the secure version of HTTP, which means that all data transmitted between the user's browser and the web server is encrypted. This is crucial for protecting sensitive information from being intercepted by attackers.
+
+3. Monitoring Clients: We install a monitoring client on each server. These clients collect data about the server's performance and send it to a central monitoring service like Sumo Logic. Monitoring is used to track the health and performance of the infrastructure, detect issues in real-time, and provide insights for troubleshooting and optimization.
+
+4. Collecting Data for Monitoring: The monitoring tool collects data through the installed clients, which can include metrics like CPU usage, memory usage, network traffic, and application-specific metrics like web server queries per second (QPS). To monitor the web server QPS, you would configure the monitoring client to collect and report the relevant data from the web server's logs or metrics endpoint.
+
+ Issues with This Infrastructure:
+
+1. Terminating SSL at the Load Balancer: If SSL termination occurs at the load balancer, the traffic between the load balancer and the web servers is unencrypted, which can be a security risk if the internal network is compromised. It's generally recommended to encrypt the entire path of the traffic.
+
+2. Single MySQL Server for Writes: Having only one MySQL server that can accept write operations is a potential bottleneck and a single point of failure. If this server goes down, the entire website would be unable to process any write operations, such as user registrations or content updates.
+
+3. Servers with All Same Components: Having each server contain the database, web server, and application server can lead to resource contention and security risks. It's often better to separate these components onto different servers or server clusters to isolate workloads and minimize the impact of potential attacks or failures.
+
+To address these issues, you could implement end-to-end encryption by using SSL certificates on both the load balancer and the web servers, set up a highly available database cluster with multiple nodes capable of handling writes, and separate the different components of the infrastructure onto dedicated servers or clusters for improved performance and security.

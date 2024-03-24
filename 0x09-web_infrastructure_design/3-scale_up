@@ -1,0 +1,20 @@
+https://imgur.com/CUOHNJD
+
+In this setup, we are enhancing the security and scalability of the web infrastructure for hosting www.foobar.com by adding a server and splitting the components (web server, application server, database) onto their own dedicated servers. Additionally, we configure the existing load balancer (HAProxy) as part of a cluster with a new load balancer to improve redundancy and load distribution. Here's a breakdown of the changes:
+
+ Additional Elements:
+
+1. Additional Server: We add one more server to the infrastructure. This server will be dedicated to hosting one of the split components, which helps in isolating workloads and improving performance and security.
+
+2. Load-Balancer Cluster: The existing HAProxy load balancer is configured to work in a cluster with a new load balancer. This setup provides redundancy, ensuring that if one load balancer fails, the other can take over and continue distributing traffic to the servers. It also enhances the ability to handle more traffic by distributing the load across multiple load balancers.
+
+3. Split Components: Each component of the web infrastructure (web server, application server, database) is hosted on its own dedicated server. This separation provides several benefits:
+   - Performance: Each component can be optimized for its specific workload without competing for resources with other components.
+   - Security: Isolating components reduces the risk of a security breach affecting all parts of the infrastructure. If one component is compromised, the others remain protected.
+   - Scalability: Each component can be scaled independently based on its specific demands. For example, if the application requires more database resources, only the database server needs to be upgraded or scaled out.
+
+ Explanation of Infrastructure:
+
+In this enhanced infrastructure, when a user accesses www.foobar.com, their request is directed to one of the HAProxy load balancers. The load balancer then distributes the request to one of the web servers based on the configured load distribution algorithm. The web server processes the request and, if needed, communicates with the application server to execute business logic or with the database server to retrieve or store data. The response is then sent back to the user through the same path.
+
+This setup provides a more robust and scalable infrastructure, capable of handling increased traffic and providing better performance and security for the hosted website.
