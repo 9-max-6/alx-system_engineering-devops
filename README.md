@@ -1,2 +1,1 @@
-#devops
-Bash scripting
+#DevOps
