@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Displays FizzBuzz when the number is a multiple of 3 and 5
+# Displays Fizz when the number is multiple of 3
+# Displays Buzz when the number is a multiple of 5
+# Otherwise, displays the number
+
+i=1
+
+while ((i <= 100))
+do
+    rem_3=$((i % 3))
+    rem_5=$((i % 5))
+    if [ "$rem_3" -ne 0 ] && [ "$rem_5" -ne 0 ]
+    then
+        echo "$i"
+    elif [ "$rem_3" -eq 0 ] && [ "$rem_5" -ne 0 ]
+    then
+        echo "Fizz"
+    elif [ "$rem_3" -ne 0 ] && [ "$rem_5" -eq 0 ]
+    then
+        echo "Buzz"
+    else
+        echo "FizzBuzz"
+    fi
+
+    i=$((i + 1))
+done
