@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Connects to a secure shell using rsa key
+
+ssh ubuntu@54.89.55.228 -i ~/.ssh/school
