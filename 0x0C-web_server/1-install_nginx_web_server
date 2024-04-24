@@ -6,7 +6,7 @@ sudo apt-get -y install nginx
 sudo ufw enable
 sudo ufw allow 'Nginx HTTP'
 sudo su
-sed -i 's/^index.*/index index.html' /etc/nginx/sites-available
+sed -i 's/^index.*/index index.html' /etc/nginx/sites-available/de*
 echo "Hello World!" > /var/www/html/index.html
 service nginx start
 
