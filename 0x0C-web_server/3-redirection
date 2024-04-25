@@ -5,10 +5,10 @@ sudo apt-get -y update
 sudo apt-get -y install nginx
 sudo ufw --force enable
 sudo ufw allow 'Nginx HTTP'
-sudo chown $USER:$USER /var/www/html/index.nginx-debian.html
+sudo chown "$USER":"$USER" /var/www/html/index.nginx-debian.html
 sudo chmod 644 /var/www/html/index.nginx-debian.html
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
-sudo chown $USER:$USER /etc/nginx/sites-available/default
+sudo chown "$USER":"$USER" /etc/nginx/sites-available/default
 configuration="server {\n
         listen 80 default_server;\n
         listen [::]:80 default_server;\n
