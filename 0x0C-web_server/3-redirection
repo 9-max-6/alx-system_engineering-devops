@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # a script to configure the server to redirect user to another page
 
 sudo apt-get -y update
