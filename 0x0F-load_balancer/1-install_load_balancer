@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # A script to install HAProxy
 
 sudo apt-get -y update
