@@ -29,6 +29,7 @@ configuration="server {\n
             internal;\n
         }\n
 }\n"
+sudo sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By \"$HOSTNAME\";/" /etc/nginx/nginx.conf
 echo -e "$configuration" > /etc/nginx/sites-avai*/def*
 sudo chown "$USER":"$USER" /var/www/html/
 sudo chmod u+w /var/www/html
