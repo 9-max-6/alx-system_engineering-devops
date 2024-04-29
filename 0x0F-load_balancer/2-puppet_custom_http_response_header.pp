@@ -1,3 +1,4 @@
+# Setting up a server using Puppet.
 package {'nginx':
   ensure     => 'installed', # 'present' changed to 'installed'
   provider   => 'apt',
