@@ -23,7 +23,9 @@ file { 'configuration file':
   path    => '/etc/nginx/sites-available/default',
   ensure  => 'file',
   owner   => 'ubuntu',
-  content => "server {
+  content => "add_header X-Served-By \"${hostname}\";
+  server {
+    
     listen 80 default_server;
     listen [::]:80 default_server;
     root /var/www/html;
@@ -32,7 +34,6 @@ file { 'configuration file':
 
     server_name _;
     location / {
-      add_header X-Served-By \"${::hostname}\";
       try_files \$uri \$uri/ /404.html; # Use proper quoting
     }
     location /redirect_me {
