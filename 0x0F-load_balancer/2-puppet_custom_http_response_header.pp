@@ -1,8 +1,8 @@
 # Setting up a server using Puppet.
 
 package {'nginx':
-	ensure     => 'present',
-	provider   => 'apt',
+        ensure     => 'present',
+        provider   => 'apt',
 
 }
 
@@ -15,10 +15,10 @@ exec { 'enable and configure ufw for Nginx HTTP':
 }
 
 file {'index.nginx-debian.html':
-	path    => '/var/www/html/index.nginx-debian.html',
-	ensure  => 'file',
+        path    => '/var/www/html/index.nginx-debian.html',
+        ensure  => 'file',
     owner   => 'ubuntu',
-	content => "Hello World!",
+        content => "Hello World!",
 }
 
 file { 'configuration file':
@@ -34,7 +34,7 @@ file { 'configuration file':
 
         server_name _;
         location / {
-                add_header X-Served-By "$::hostname"
+                add_header X-Served-By ${::hostname};
                 try_files \$uri \$uri/ =404;
         }
         location /redirect_me {
@@ -51,9 +51,9 @@ file { 'configuration file':
 
 file {'/var/www/html/404.html':
     path    =>  '/var/www/html/404.html',
-	ensure  => 'file',
-	owner   => 'ubuntu',
-	content => "Ceci n'est pas une page"
+        ensure  => 'file',
+        owner   => 'ubuntu',
+        content => "Ceci n'est pas une page"
 }
 exec { 'update nginx configuration and restart':
   command  => "/usr/bin/sudo /bin/sed -i 's@try_files \\$uri \\$uri/ =404;@try_files \\$uri \\$uri/ /404.html;@' /etc/nginx/sites-available/default && /usr/bin/sudo /usr/sbin/service nginx restart",
