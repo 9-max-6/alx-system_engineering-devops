@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# a Bash script that will display information about subdomains.
+
+web_1="web-01"
+web_2="web-02"
+l_b="lb-01"
+DEFAULT=""
+
+print_sub_domain()
+{
+	echo "The subdomain $2 is a $3 record and points to $4"
+}
+
+get_single_dom()
+{
+	record_type=$(dig $2.$1 | grep -A1 "ANSWER SECTION:" | tail -n 1 | awk '// {print $4}')
+	dest=$(dig "$2"."$1" | grep -A1 "ANSWER SECTION:" | tail -n 1 | awk '// {print $5}')
+	print_sub_domain "$1" "$2" "$record_type" "$dest"
+}
+get_all_dom()
+{
+    get_single_dom "$1" "$web_1"
+	get_single_dom "$1" "$web_2"
+	get_single_dom "$1" "$l_b"
+
+}
+get_domain() 
+{
+	if [ -n "$2" ]
+	then
+		get_single_dom "$1" "$2"
+	else
+		get_all_dom "$1"
+	fi
+}
+domain="${1-$DEFAULT}"
+subdomain="${2-$DEFAULT}"
+get_domain "$domain" "$subdomain"
