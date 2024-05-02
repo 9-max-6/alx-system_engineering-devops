@@ -4,6 +4,7 @@
 web_1="web-01"
 web_2="web-02"
 l_b="lb-01"
+www="www"
 DEFAULT=""
 
 print_sub_domain()
@@ -22,7 +23,7 @@ get_all_dom()
     get_single_dom "$1" "$web_1"
 	get_single_dom "$1" "$web_2"
 	get_single_dom "$1" "$l_b"
-
+	get_single_dom "$1" "$www"
 }
 get_domain() 
 {
