@@ -20,10 +20,10 @@ get_single_dom()
 }
 get_all_dom()
 {
+	get_single_dom "$1" "$www"
+	get_single_dom "$1" "$l_b"
     get_single_dom "$1" "$web_1"
 	get_single_dom "$1" "$web_2"
-	get_single_dom "$1" "$l_b"
-	get_single_dom "$1" "$www"
 }
 get_domain() 
 {
