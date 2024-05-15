@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Bash script to check current user
+sudo -u $1 whoami
