@@ -1,0 +1,139 @@
+#!/usr/bin/python3
+
+"""
+A script that fetches info about an employee from an API
+"""
+import csv
+import json
+import requests
+from sys import argv
+
+
+class Employee():
+    """
+    A class to encapsulate employee logic
+    """
+    __name = ""
+    __id = None
+    __tasks = []
+    __completed = None
+    __username = None
+
+    def __init__(self, employee_id, user_dict, task_list):
+        """constructor for the employee object"""
+        self.id = employee_id
+        self.name = user_dict
+        self.username = user_dict
+        self.tasks = task_list
+        self.completed = self.tasks
+
+    @property
+    def id(self):
+        """property getter"""
+        return self.__id
+
+    @property
+    def username(self):
+        """property getter"""
+        return self.__username
+
+    @property
+    def name(self):
+        """property getter"""
+        return self.__name
+
+    @property
+    def tasks(self):
+        """property getter"""
+        return self.__tasks
+
+    @property
+    def completed(self):
+        """property getter"""
+        return self.__completed
+
+    @completed.setter
+    def completed(self, tasks):
+        """property setter"""
+        count = 0
+        for task in tasks:
+            if task.get('completed'):
+                count += 1
+        self.__completed = count
+
+    @name.setter
+    def name(self, dict=None):
+        """A function to set the name of the employee"""
+        self.__name = dict.get("name", None)
+
+    @username.setter
+    def username(self, dict=None):
+        """A function to set the name of the employee"""
+        self.__username = dict.get("username", None)
+
+    @id.setter
+    def id(self, value):
+        """A function to set the id of the employee"""
+        self.__id = value
+
+    @tasks.setter
+    def tasks(self, task_dict=None):
+        """A function to set the tasks of a particular employee"""
+        if task_dict:
+            for task in task_dict:
+                if task.get("userId", None) == int(self.id):
+                    new_task = {}
+                    new_task["task"] = task.get('title', None)
+                    new_task["completed"] = task.get("completed", None)
+                    new_task["username"] = self.username
+                    self.__tasks.append(new_task)
+
+    def get_csv(self):
+        """A factory method to make a csv from the object"""
+        file_name = f"{self.id}.csv"
+        with open(file_name, mode='w', newline='') as file:
+            writer = csv.writer(file, quoting=csv.QUOTE_ALL)
+            for task in self.tasks:
+                row = (
+                    (self.id),
+                    (self.username),
+                    (task.get("completed")),
+                    (task.get("title"))
+                    )
+                writer.writerow(row)
+
+    def get_json(self):
+        """A function to generate json dump"""
+        filename = f"{self.id}.json"
+        user_dict = {}
+        user_dict[f"{self.id}"] = self.tasks
+        print(user_dict)
+        with open(filename, 'w') as json_file:
+            json.dump(user_dict, json_file)
+
+    def __str__(self):
+        """A function to print the object"""
+        emp_string = f"Employee {self.name} is done "\
+            f"with tasks({self.completed}/{len(self.tasks)}):"
+        print(emp_string)
+        for task in self.tasks:
+            if task.get('completed'):
+                f = f"\t {task.get('title')}"
+                print(f)
+        return ""
+
+
+if __name__ == '__main__':
+    employee_id = argv[1]
+    task_url = "https://jsonplaceholder.typicode.com/todos"
+    user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
+
+    with requests.get(user_url) as resp:
+        if resp.status_code == 200:
+            user_dict = resp.json()
+    with requests.get(task_url) as resp:
+        if resp.status_code == 200:
+            task_list = resp.json()
+
+    employee = Employee(employee_id, user_dict, task_list)
+    employee.get_json()
