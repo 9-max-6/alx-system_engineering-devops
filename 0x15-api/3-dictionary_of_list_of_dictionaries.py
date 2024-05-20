@@ -81,9 +81,9 @@ class Employee():
             for task in task_dict:
                 if task.get("userId", None) == int(self.id):
                     new_task = {}
+                    new_task["username"] = self.username
                     new_task["task"] = task.get('title', None)
                     new_task["completed"] = task.get("completed", None)
-                    new_task["username"] = self.username
                     self.__tasks.append(new_task)
 
     def __str__(self):
