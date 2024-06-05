@@ -9,8 +9,7 @@ def top_ten(subreddit):
     first 10 hot posts listed for a given subreddit."""
     url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
     headers = {
-        "User-Agent": 'Mozilla/5.0 (X11; Ubuntu; \
-        Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0'
+        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
     }
     params = {
         "limit": 10
