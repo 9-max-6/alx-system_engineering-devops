@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""module - function_name number_of subscribers
+"""module - function_name-> number_of subscribers
  """
 import requests
 
@@ -13,7 +13,7 @@ def number_of_subscribers(subreddit):
         Linux x86_64; rv:126.0) Gecko/20100101 Firefox/126.0'
     }
     with requests.get(url, headers=headers, allow_redirects=False) as resp:
-        if resp.status_code != 200:
+        if resp.status_code == 404:
             return 0
         else:
             resp_data = resp.json().get('data')
