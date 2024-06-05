@@ -16,7 +16,7 @@ def top_ten(subreddit):
         "limit": 10
     }
     with requests.get(url, headers=headers, params=params,
-                            allow_redirects=False) as resp:
+                      allow_redirects=False) as resp:
         if resp.status_code == 404:
             print("None")
             return
