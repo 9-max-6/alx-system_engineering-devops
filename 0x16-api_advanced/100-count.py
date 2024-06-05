@@ -21,14 +21,15 @@ def set_dict(word_list, my_dict={}):
         my_dict[word.lower()] = 0
     return my_dict
 
+
 def print_dict(a_dictionary):
     """A function to print a dictionary"""
-    printed_keys=[]
+    printed_keys = []
     for key, value in a_dictionary.items():
         if key not in printed_keys:
             print('{}: {}'.format(key, value))
             printed_keys.append(key)
-        
+
 
 def listing_count_words(a_listing, a_dictionary):
     """A function to count occurences of words in a title list
