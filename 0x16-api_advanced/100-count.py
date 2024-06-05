@@ -48,7 +48,6 @@ def listing_count_words(a_listing, a_dictionary):
     return a_dictionary
 
 
-
 def count_words(subreddit, word_list, after=None, count=0, dict_count=None):
     """A function that queries the Reddit API and returns
     a list containing the titles of all hot articles for a given subreddit"""
