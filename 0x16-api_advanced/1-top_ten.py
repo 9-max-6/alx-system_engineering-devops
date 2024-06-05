@@ -20,6 +20,6 @@ def top_ten(subreddit):
             print("None")
             return
         results = resp.json().get("data")
-        for result in results:
+        for result in results.get('children'):
             data = result.get('data')
             print(data.get('title'))
