@@ -5,7 +5,6 @@
 - **Impact**: Users were locked out, unable to log in. Approximately 60% of our user base (around 12,000 users) were affected, experiencing either timeouts or error messages. It was like everyone forgot their keys at home.
 - **Root Cause**: A sneaky database query decided to throw a tantrum, causing a deadlock that froze the login process.
 
-![Outage Timeline](https://via.placeholder.com/600x400?text=Outage+Timeline)
 
 #### Timeline
 - **10:05 AM**: 🚨 **Alert**: Monitoring system starts screaming about failed login attempts.
@@ -44,7 +43,6 @@ By addressing these tasks, we aim to prevent similar incidents in the future and
 ### Diagram Explanation
 Here's a simplified diagram that visually represents the timeline of the outage and resolution steps. This helps in quickly understanding the sequence of events:
 
-![Outage Diagram](https://via.placeholder.com/600x400?text=Outage+Timeline+Diagram)
 
 - **10:05 AM**: Alert triggered.
 - **10:10 AM**: Initial investigation.
