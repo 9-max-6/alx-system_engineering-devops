@@ -40,8 +40,8 @@ By addressing these tasks, we aim to prevent similar incidents in the future and
 
 ---
 
-### Diagram Explanation
-Here's a simplified diagram that visually represents the timeline of the outage and resolution steps. This helps in quickly understanding the sequence of events:
+### Timeline Breakdown
+Here's a breakdown that visually represents the timeline of the outage and resolution steps. This helps in quickly understanding the sequence of events:
 
 
 - **10:05 AM**: Alert triggered.
