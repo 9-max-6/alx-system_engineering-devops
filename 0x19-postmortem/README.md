@@ -39,20 +39,3 @@
 By addressing these tasks, we aim to prevent similar incidents in the future and ensure a smoother, more reliable login experience for our users.
 
 ---
-
-### Timeline Breakdown
-Here's a breakdown that visually represents the timeline of the outage and resolution steps. This helps in quickly understanding the sequence of events:
-
-
-- **10:05 AM**: Alert triggered.
-- **10:10 AM**: Initial investigation.
-- **10:20 AM**: Network issue suspected.
-- **10:35 AM**: Network team clears suspicion.
-- **10:50 AM**: Memory leak investigation.
-- **11:05 AM**: Database team investigates.
-- **11:20 AM**: Deadlock identified.
-- **11:30 AM**: Temporary fix applied.
-- **11:45 AM**: Hotfix deployed.
-- **12:00 PM**: Issue resolved.
-
-This timeline and the accompanying measures ensure that we learn from our mishaps and fortify our systems against future occurrences.
