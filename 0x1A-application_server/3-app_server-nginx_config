@@ -1,0 +1,59 @@
+server {
+
+        listen 80 default_server;
+        listen [::]:80 default_server;
+       add_header X-Served-By 531574-web-01;
+        root /var/www/html;
+
+        index 0-index.html index.htm index.nginx-debian.html;
+
+        server_name _;
+
+        location / {
+                try_files $uri $uri/ /404.html;
+
+        }
+
+	location /hbnb_static {
+
+            alias /data/web_static/current;
+            index index.html;
+            try_files $uri $uri/ /hbnb_static/0-index.html /404.html;
+        }
+
+        location /airbnb-onepage/ {
+	   proxy_pass http://0.0.0.0:5002;
+	   proxy_set_header Host $host;
+           proxy_set_header X-Real-IP $remote_addr;
+           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+           proxy_set_header X-Forwarded-Proto $scheme;
+        }
+
+	location ~ ^/airbnb-dynamic/number_odd_or_even/(\d+)/$ {
+		rewrite ^/airbnb-dynamic/(.*) /$1 break;
+		proxy_pass http://0.0.0.0:5003;
+		proxy_set_header X-Forwarded-Uri $request_uri;
+		 proxy_set_header Host $host;
+        	proxy_set_header X-Real-IP $remote_addr;
+       		 proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+       		 proxy_set_header X-Forwarded-Proto $scheme;
+	}
+
+
+        location /redirect_me {
+
+            return 301 https://www.alxafrica.com;
+
+        }
+
+        error_page 404 /404.html;
+
+        location = /404.html {
+
+            root /var/www/html;
+
+            internal;
+
+        }
+
+}
