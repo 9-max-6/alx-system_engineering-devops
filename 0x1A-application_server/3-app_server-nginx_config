@@ -29,9 +29,8 @@ server {
            proxy_set_header X-Forwarded-Proto $scheme;
         }
 
-	location ~ ^/airbnb-dynamic/number_odd_or_even/(\d+)/$ {
-		rewrite ^/airbnb-dynamic/(.*) /$1/ break;
-		proxy_pass http://0.0.0.0:5001;
+	location ~ ^/airbnb-dynamic/number_odd_or_even/(\d+)$ {
+		proxy_pass http://0.0.0.0:5001/number_odd_or_even/$1;
 		proxy_set_header X-Forwarded-Uri $request_uri;
 		 proxy_set_header Host $host;
         	proxy_set_header X-Real-IP $remote_addr;
