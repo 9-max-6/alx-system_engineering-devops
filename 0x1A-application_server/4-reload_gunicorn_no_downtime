@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # Reload Gunicorn gracefully
 
 sudo lsof -i :5003 | grep 'LISTEN' | grep 'gunicorn' | awk '{print $2}' | xargs sudo kill -HUP
