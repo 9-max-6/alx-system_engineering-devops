@@ -1,6 +1,6 @@
 # Changing the number of open file descriptors limit to 4096
 
-exec {'replace':
+exec {'FD Change':
   provider => shell,
   command  => 'sudo sed -i "s/ULIMIT=\"-n 15\"/ULIMIT=\"-n 1024\"/" /etc/default/nginx',
   before   => Exec['restart'],
